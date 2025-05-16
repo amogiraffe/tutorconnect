@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Page Header -->
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-5 fw-bold">Available Tutors</h1>
+      <p class="lead">Find the perfect tutor for your needs</p>
+    </div>
+    <div class="col-auto">
+      <a href="#" class="btn btn-primary">Become a Tutor</a>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <form class="row g-3">
+        <div class="col-md-5">
+          <label for="subject" class="form-label">Subject</label>
+          <select class="form-select" id="subject">
+            <option selected>All Subjects</option>
+            <option>Mathematics</option>
+            <option>Physics</option>
+            <option>Chemistry</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label for="availability" class="form-label">Availability</label>
+          <select class="form-select" id="availability">
+            <option selected>Any Time</option>
+            <option>Weekdays</option>
+            <option>Weekends</option>
+          </select>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tutor Cards -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for tutor in tutors %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="card-title mb-0">{{ tutor.user.get_full_name }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex mb-3">
+            <span class="badge bg-success me-2">
+              ★ {{ tutor.rating|default:"4.5" }}
+            </span>
+            <span class="badge bg-info">
+              ${{ tutor.hourly_rate }}/hr
+            </span>
+          </div>
+          <p class="card-text">{{ tutor.bio|truncatechars:100 }}</p>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">
+              <strong>Subjects:</strong> {{ tutor.subjects }}
+            </li>
+            <li class="list-group-item">
+              <strong>Availability:</strong> Mon-Fri, 3pm-8pm
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer bg-transparent">
+          <a href="#" class="btn btn-outline-primary w-100">View Profile</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <div class="alert alert-info">
+        No tutors available yet. Check back soon!
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  {% if is_paginated %}
+  <nav class="mt-5">
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      </li>
+      {% endif %}
+      <li class="page-item active">
+        <span class="page-link">{{ page_obj.number }}</span>
+      </li>
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+</div>
+{% endblock %}

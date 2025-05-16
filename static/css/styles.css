@@ -11,3 +11,21 @@ body {
     background-color: #3a86ff;
     border-color: #3a86ff;
 }
+
+/* Auth buttons */
+.nav-link {
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  transform: translateY(-2px);
+}
+
+/* Signup form */
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  padding: 10px 20px;
+}
