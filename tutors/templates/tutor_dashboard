@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-3">Tutor Dashboard</h1>
+  <p class="lead">Welcome, {{ user.username }}! Here’s your tutor control panel.</p>
+
+  <div class="row">
+    <!-- Upcoming Appointments -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5>Upcoming Appointments</h5>
+        </div>
+        <div class="card-body">
+          {% if upcoming_appointments %}
+            <ul class="list-group list-group-flush">
+              {% for appointment in upcoming_appointments %}
+                <li class="list-group-item">
+                  {{ appointment.date }} at {{ appointment.time }} with {{ appointment.student.username }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>No upcoming appointments scheduled.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages or Notifications -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+          <h5>Messages</h5>
+        </div>
+        <div class="card-body">
+          <p>You have no new messages.</p>
+          <!-- You can replace this with dynamic message list -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <a href="{% url 'tutor_profile_edit' %}" class="btn btn-outline-primary me-2">
+      <i class="bi bi-pencil-square"></i> Edit Profile
+    </a>
+    <a href="{% url 'tutor_appointments' %}" class="btn btn-outline-success">
+      <i class="bi bi-calendar-event"></i> Manage Appointments
+    </a>
+  </div>
+</div>
+{% endblock %}

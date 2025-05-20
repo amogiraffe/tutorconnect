@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Welcome to Your Dashboard</h2>
+  <p>From here, you can:</p>
+  <ul>
+    <li><a href="{% url 'tutor_list' %}">Browse Tutors</a></li>
+    <li><a href="{% url 'book_appointment' %}">Book an Appointment</a></li>
+    <!-- Add more dashboard links as needed -->
+  </ul>
+{% endblock %}

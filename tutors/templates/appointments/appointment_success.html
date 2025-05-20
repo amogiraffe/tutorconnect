@@ -1,0 +1,8 @@
+<!-- appointments/templates/appointments/appointment_success.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Appointment Booked Successfully!</h2>
+  <p>Thank you. Your appointment has been scheduled.</p>
+  <a href="{% url 'student_dashboard' %}">Go to Dashboard</a> <!-- Update link if needed -->
+{% endblock %}
